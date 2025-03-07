@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import axios from 'axios'
 import './App.css'
+import WeatherInformation from './componets/WeatherInformation/WeatherInformation'
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
       <h1>Dev Previsão do Tempo</h1>
       <input ref={inputRef} type='text' placeholder='Digite o nome da cidade'/>
       <button onClick={searcCity}>Buscar</button>
+
+      <WeatherInformation weather={weather}/>
     </>
   )
 }
