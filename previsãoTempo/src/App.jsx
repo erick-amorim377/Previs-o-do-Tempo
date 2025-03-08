@@ -5,7 +5,7 @@ import WeatherInformation from './componets/WeatherInformation/WeatherInformatio
 
 
 function App() {
-  const [weather, setWeather] = useState(0)
+  const [weather, setWeather] = useState()
   
 
   const inputRef = useRef()
@@ -16,9 +16,9 @@ function App() {
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=pt_br&units=metric&appid=${key}`
 
-    const data = await axios.get(url)
+    const aipInfoData = await axios.get(url)
+    setWeather(aipInfoData.data)
 
-    console.log(data);
   }
 
   return (
@@ -27,7 +27,7 @@ function App() {
       <input ref={inputRef} type='text' placeholder='Digite o nome da cidade'/>
       <button onClick={searcCity}>Buscar</button>
 
-      <WeatherInformation weather={weather}/>
+      {weather && <WeatherInformation weather={weather}/>}
     </>
   )
 }
