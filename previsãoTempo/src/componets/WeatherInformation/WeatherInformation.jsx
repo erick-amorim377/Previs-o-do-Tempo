@@ -1,9 +1,10 @@
 import React from 'react'
+import "./WeatherInformation.css"
 
 function WeatherInformation({weather}) {
     console.log(weather)
   return (
-    <div>
+    <div className='weatherContainer'>
        <h2>{weather.name}</h2>
         <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}/>
 
