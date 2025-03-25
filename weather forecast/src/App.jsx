@@ -8,7 +8,45 @@ import WeatherInformationFiveDays from './componets/WeatherInformationFiveDays/W
 function App() {
   const [weather, setWeather] = useState();
   const [fiveWeather, setFiveWeather] = useState()
+  const [city, setCity] = useState();
   
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(showLocation, erroLocation)
+  }else{
+    console.log("acesso negado!!!")
+  }
+  function erroLocation(){
+    console.log("erro ao obter a localização")
+  }
+
+
+
+  function showLocation(pos){
+    const lat = pos.coords.latitude
+    const long = pos.coords.longitude
+    const urlShowLocation = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${long}`;
+
+    fetch(urlShowLocation)
+      .then(Response => Response.json())
+      .then(data => {
+        if (data.address) {
+          const cityShow = data.address.city || data.address.town || data.address.village;
+          console.log(`${cityShow}`);
+        }else {
+          console.log("cidade não encontrada");
+        }
+      })
+      .catch(error => console.error("erro ao buscar a cidade", error))
+
+
+      
+  }
+
+
+  
+
+
+
 
   const inputRef = useRef()
 
