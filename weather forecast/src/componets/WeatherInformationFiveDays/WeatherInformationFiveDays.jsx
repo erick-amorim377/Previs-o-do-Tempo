@@ -19,7 +19,6 @@ function WeatherInformationFiveDays({fiveWeather}) {
   function convertDay(date){
   
     const newDate = new Date(date.dt * 1000).toLocaleDateString('pt-Br', {weekday: 'long', day: "2-digit"})
-
     return newDate
   }
 
@@ -41,7 +40,7 @@ function WeatherInformationFiveDays({fiveWeather}) {
       ))}
       </div>
 
-    </div>
+     </div>
   )
 }
 
