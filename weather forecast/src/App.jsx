@@ -9,7 +9,10 @@ function App() {
   const [fiveWeather, setFiveWeather] = useState();
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef(null);
-  const key = "7e46c6ef4f89e59dad6be9bb48be367a";
+  const apiKey = import.meta.env.VITE_KEY;
+  
+  
+  
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -23,7 +26,7 @@ function App() {
     try{
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-      const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+      const url = `${import.meta.env.VITE_URL}&lat=${lat}&lon=${lon}`;
 
       const response = await fetch(url);
       const data = await response.json();
@@ -31,19 +34,19 @@ function App() {
         data.address?.city ||
         data.address?.town ||
         data.address?.village ||
-        "São João de Meriti";
+        "tokio";
       setInputValue(city);
       searchCity(city);
 
     } catch (error){
         console.error("Erro ao obter a localização:", error);
-        setInputValue("São João de Meriti");
+        setInputValue("tokio");
     }
   }
 
   async function searchCity(city = inputRef.current.value) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=pt_br&units=metric&appid=${key}`;
-    const urlFiveDays = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=pt_br&units=metric&appid=${key}`;
+    const url = `${import.meta.env.VITE_URL_SEACH}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
+    const urlFiveDays = `${import.meta.env.VITE_URL_SEACH_FIVE}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
 
     const weatherData = await axios.get(url);
     const fiveDaysData = await axios.get(urlFiveDays);

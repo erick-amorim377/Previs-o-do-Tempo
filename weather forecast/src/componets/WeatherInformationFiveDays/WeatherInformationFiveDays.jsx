@@ -33,7 +33,7 @@ function WeatherInformationFiveDays({fiveWeather}) {
       {nextFiveDays.map(forecast => (
         <div key={forecast.td} className='weatherItem'>
           <p className='forecastDay'>{convertDay(forecast)}</p>
-          <img src={`http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`}/>
+          <img src={`${import.meta.env.VITE_IMG_CLOUND}${forecast.weather[0].icon}.png`}/>
           <p className='forecastDescription'>{forecast.weather[0].description}</p>
           <p>{Math.round(forecast.main.temp_min)}°C min / {Math.round(forecast.main.temp_max)}°C max</p>
         </div>
