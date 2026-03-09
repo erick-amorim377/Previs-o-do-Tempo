@@ -6,10 +6,10 @@ function WeatherInformationFiveDays({fiveWeather}) {
   let dailyForecast = {}
 
   for(let forecast of fiveWeather.list) {
-   const date = new Date(forecast.dt * 1000).toDateString();
-    
-   if (!dailyForecast[date]){
-    dailyForecast[date] = forecast
+    const date = new Date(forecast.dt * 1000).toDateString();
+    if (!dailyForecast[date]){
+      dailyForecast[date] = forecast
+
    }
     
   }
@@ -31,7 +31,7 @@ function WeatherInformationFiveDays({fiveWeather}) {
       <div className='weatherList'>
 
       {nextFiveDays.map(forecast => (
-        <div key={forecast.td} className='weatherItem'>
+        <div key={forecast.dt} className='weatherItem'>
           <p className='forecastDay'>{convertDay(forecast)}</p>
           <img src={`${import.meta.env.VITE_IMG_CLOUND}${forecast.weather[0].icon}.png`}/>
           <p className='forecastDescription'>{forecast.weather[0].description}</p>

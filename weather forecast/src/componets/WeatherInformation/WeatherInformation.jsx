@@ -6,7 +6,7 @@ function WeatherInformation({weather}) {
     <div className='weatherContainer'>
        <h2>{weather.name}</h2>
        <div className='weatherInfo'>
-          <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}/>
+          <img src={`${import.meta.env.VITE_IMG_CLOUND}${weather.weather[0].icon}.png`}/>
 
           <p className='temperature'>{Math.round(weather.main.temp)}°C</p>
         </div>

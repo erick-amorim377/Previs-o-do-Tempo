@@ -26,14 +26,17 @@ function App() {
     try{
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-      const url = `${import.meta.env.VITE_URL}&lat=${lat}&lon=${lon}`;
+      console.log(lat, lon)
+      const url = `${import.meta.env.VITE_URL_SEARCH_COORDS}${lat}&lon=${lon}&appid=${apiKey}`;
 
       const response = await fetch(url);
       const data = await response.json();
+      console.log(data)
       const city =
-        data.address?.city ||
-        data.address?.town ||
-        data.address?.village ||
+        data.city ||
+        data.town ||
+        data.village ||
+        data.name ||
         "tokio";
       setInputValue(city);
       searchCity(city);
@@ -45,8 +48,8 @@ function App() {
   }
 
   async function searchCity(city = inputRef.current.value) {
-    const url = `${import.meta.env.VITE_URL_SEACH}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
-    const urlFiveDays = `${import.meta.env.VITE_URL_SEACH_FIVE}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
+    const url = `${import.meta.env.VITE_URL_SEARCH}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
+    const urlFiveDays = `${import.meta.env.VITE_URL_SEARCH_FIVE}${city}&lang=pt_br&units=metric&appid=${apiKey}`;
 
     const weatherData = await axios.get(url);
     const fiveDaysData = await axios.get(urlFiveDays);
