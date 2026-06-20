@@ -26,12 +26,10 @@ function App() {
     try{
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-      console.log(lat, lon)
       const url = `${import.meta.env.VITE_URL_SEARCH_COORDS}${lat}&lon=${lon}&appid=${apiKey}`;
 
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data)
       const city =
         data.city ||
         data.town ||
